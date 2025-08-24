@@ -1,6 +1,7 @@
 from django.db import models
+from .base_model import BaseModel
 
-class Staff(models.Model):
+class Staff( BaseModel):
     national_code = models.CharField(max_length=100, primary_key=True)
     name = models.CharField(max_length=100)
     family = models.CharField(max_length=100)
@@ -8,13 +9,13 @@ class Staff(models.Model):
     
 
 
-class StaffPhone(models.Model):
-    national_code = models.ForeignKey(Staff, on_delete=models.CASCADE)
+class StaffPhone(BaseModel):
+    staff_member = models.ForeignKey(Staff, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=100)
     phone_type = models.CharField(max_length=50)  
     
     class Meta:
-        unique_together = ['national_code', 'phone_number']
+        unique_together = ['staff_member' , 'phone_number']
        
     
 

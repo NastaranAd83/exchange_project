@@ -1,7 +1,10 @@
 from django.db import models
 from .exchange import Exchange
+from .base_model import BaseModel
 
-class Debt(models.Model):
+
+class Debt(BaseModel):
+    
     debt_id = models.AutoField(primary_key=True)
     debt_amount = models.DecimalField(max_digits=10, decimal_places=2)
     debt_date = models.DateField(auto_now_add=True)
