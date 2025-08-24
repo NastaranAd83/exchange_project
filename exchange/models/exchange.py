@@ -16,9 +16,10 @@ class Exchange(models.Model):
     exchange_name = models.CharField(max_length=100)
     exchange_website = models.URLField(max_length=100)
     exchange_logo = models.ImageField(upload_to='exchange_logos/')
-    address_id = models.ForeignKey(ExchangeAddress, on_delete=models.CASCADE,primary_key=True)
+    address_id = models.OneToOneField(ExchangeAddress, on_delete=models.CASCADE,primary_key=True)
     
     staff = models.ManyToManyField('Staff', through='ExchangeStaff', related_name='exchanges')
+    currency = models.ManyToManyField('Currency', through='ExchangeCurrency', related_name='exchanges')
 
 
 
@@ -28,11 +29,8 @@ class ExchangePhone(models.Model):
     phone_number = models.CharField(max_length=100)
     phone_type = models.CharField(max_length=50)  
     
-    # class Meta:
-    #    # unique_together = ['exchange_zip_code', 'phone_number']
-    #    primary_key = CompositeKey('exchange_zip_code', 'phone_number')
+    
 
          
-class ExchangeStaff(models.Model):
-    pass
+
 
